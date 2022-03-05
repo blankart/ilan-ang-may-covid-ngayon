@@ -4,10 +4,6 @@ export async function getCases(date?: string) {
     const INITIAL_DATE = new Date("03/05/2022");
     const CURRENT_DATE = date ? new Date(date) : new Date();
 
-    if (!date) {
-      CURRENT_DATE.setTime(CURRENT_DATE.getTime() + 1_000 * 60 * 60 * 8);
-    }
-
     const DAY_DIFF = Math.floor(
       (CURRENT_DATE.getTime() - INITIAL_DATE.getTime()) / (1_000 * 60 * 60 * 24),
     );
