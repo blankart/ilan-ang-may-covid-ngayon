@@ -78,6 +78,7 @@ const Home: NextPage = ({
               </p>
             </div>
           </div>
+          <p className="italic text-[0.8rem] font-[300]">Data Source: Department of Health</p>
         </div>
         <div>
           <p className="text-[0.7rem]">© Ilan Ang May Covid Ngayon?</p>
