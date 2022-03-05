@@ -39,7 +39,7 @@ const Home: NextPage = ({
             </h2>
           ) : (
             <h2 className="text-[1.6rem] leading-8 font-[400] tracking-[-0.12rem] my-4">
-              Alamin ang bilang ng kaso ng COVID-19 sa Pilipinas 🇵🇭 ngayon <br />
+              Alamin ang bilang ng kaso ng COVID-19 sa Pilipinas 🇵🇭 ngayong <br />
               {foundDataDate}
             </h2>
           )}
