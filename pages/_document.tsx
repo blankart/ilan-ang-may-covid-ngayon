@@ -5,7 +5,12 @@ export default function Document() {
   const url = "https://ilan-ang-may-covid-ngayon.vercel.app/";
   const description = "Alamin ang bilang ng kaso ng COVID-19 sa Pilipinas 🇵🇭 ngayon";
   return (
-    <Html>
+    <Html
+      className={
+        typeof window !== "undefined" && localStorage?.getItem("is-dark-mode") === "true"
+          ? "dark"
+          : undefined
+      }>
       <Head>
         <title>{title}</title>
         <meta charSet="utf-8" />
