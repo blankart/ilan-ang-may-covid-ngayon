@@ -6,7 +6,7 @@ export default function Document() {
   const description = "Alamin ang bilang ng kaso ng COVID-19 sa Pilipinas 🇵🇭 ngayon";
   return (
     <Html
-      lang="ph"
+      lang="en-PH"
       className={
         typeof window !== "undefined" && localStorage?.getItem("is-dark-mode") === "true"
           ? "dark"
@@ -28,7 +28,7 @@ export default function Document() {
         <meta name="apple-mobile-web-app-title" content={title} />
         <meta name="application-name" content={title} />
         <meta name="og:url" content={url} />
-        <meta name="og:locale" content={"ph"} />
+        <meta name="og:locale" content={"en-PH"} />
         <meta name="og:image:width" content={"500"} />
         <meta name="og:image:height" content={"185"} />
         <meta name="og:image:type" content={"image/png"} />
