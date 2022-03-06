@@ -86,6 +86,7 @@ const Home: NextPage = ({
 export const getStaticProps: GetStaticProps = async (ctx) => {
   return {
     props: await getCases(),
+    revalidate: 60,
   };
 };
 
