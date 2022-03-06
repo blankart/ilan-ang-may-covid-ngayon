@@ -6,6 +6,7 @@ export default function Document() {
   const description = "Alamin ang bilang ng kaso ng COVID-19 sa Pilipinas 🇵🇭 ngayon";
   return (
     <Html
+      lang="ph"
       className={
         typeof window !== "undefined" && localStorage?.getItem("is-dark-mode") === "true"
           ? "dark"
