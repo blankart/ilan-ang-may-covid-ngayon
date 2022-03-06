@@ -62,15 +62,15 @@ const Home: NextPage = ({
           <div className="grid grid-cols-1 gap-2 md:grid-cols-3 w-[min(100%,1200px)] py-2">
             <div className="rounded-2xl p-6 bg-yellow-200 dark:bg-yellow-600">
               <p className="font-[600] text-[2.8rem] opacity-90">{numberWithCommas(activeCases)}</p>
-              <p className="uppercase opacity-80 font-[200]">aktibong kaso {appendedText}</p>
+              <p className="uppercase opacity-80 font-[200]">aktibong kaso</p>
             </div>
             <div className="rounded-2xl p-6 bg-green-400 dark:bg-green-800">
               <p className="font-[600] text-[2.8rem] opacity-90">{numberWithCommas(recovered)}</p>
-              <p className="uppercase opacity-80 font-[200]">gumaling {appendedText}</p>
+              <p className="uppercase opacity-80 font-[200]">gumaling</p>
             </div>
             <div className="rounded-2xl p-6 bg-red-300 dark:bg-red-700">
               <p className="font-[600] text-[2.8rem] opacity-90">{numberWithCommas(died)}</p>
-              <p className="uppercase opacity-80 font-[200]">namatay {appendedText}</p>
+              <p className="uppercase opacity-80 font-[200]">namatay</p>
             </div>
           </div>
           <p className="italic text-[0.8rem] font-[300]">Data Source: Department of Health</p>
