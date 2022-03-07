@@ -1,4 +1,4 @@
-import type { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
+import type { GetStaticPropsContext, InferGetStaticPropsType, NextPage } from "next";
 import dayjs from "dayjs";
 import { getCases } from "../services/cases";
 import dynamic from "next/dynamic";
@@ -8,7 +8,7 @@ function numberWithCommas(x: number) {
   return x?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-const Home: NextPage = ({
+const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   activeCases,
   recovered,
   died,
@@ -16,12 +16,14 @@ const Home: NextPage = ({
   newCases,
   newRecovered,
   newDied,
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
+  lastUpdated,
+}) => {
   const _todaysDate = new Date();
   const todaysDate = dayjs(_todaysDate).format("MMMM DD, YYYY");
-  const foundDataDate = dayjs(new Date(date)).format("MMMM DD, YYYY");
+  const foundDataDate = date ? dayjs(new Date(date)).format("MMMM DD, YYYY") : null;
   const fromYesterday = todaysDate !== foundDataDate;
   const appendedText = fromYesterday ? "kahapon" : null;
+  const lastUpdatedDate = dayjs(new Date(lastUpdated)).format("MMMM D, YYYY h:mm A");
 
   return (
     <>
@@ -44,32 +46,44 @@ const Home: NextPage = ({
               {foundDataDate}
             </h2>
           )}
-          <p className="italic text-[0.8rem] font-[300]">Last Updated: {todaysDate}</p>
+          <p className="italic text-[0.8rem] font-[300]">Last Updated: {lastUpdatedDate}</p>
           <div className="p-6 border-2 rounded-2xl border-yellow-200 dark:border-yellow-600 my-2">
-            <p className="font-[600] text-[4.5rem]">{numberWithCommas(newCases)}</p>
+            <p className="font-[600] text-[4.5rem]">
+              {newCases ? numberWithCommas(newCases) : null}
+            </p>
             <p className="uppercase text-[2rem]">bagong kaso {appendedText}</p>
             <div className="flex flex-col md:flex-row justify-center items-center gap-4 mt-6]">
               <div>
-                <p className="text-[3rem] font-[600]">{numberWithCommas(newRecovered)}</p>
+                <p className="text-[3rem] font-[600]">
+                  {newRecovered ? numberWithCommas(newRecovered) : null}
+                </p>
                 <p className="uppercase font-[300]">bagong gumaling {appendedText}</p>
               </div>
               <div>
-                <p className="text-[3rem] font-[600]">{numberWithCommas(newDied)}</p>
+                <p className="text-[3rem] font-[600]">
+                  {newDied ? numberWithCommas(newDied) : null}
+                </p>
                 <p className="uppercase font-[300]">bagong namatay {appendedText}</p>
               </div>
             </div>
           </div>
           <div className="grid grid-cols-1 gap-2 md:grid-cols-3 w-[min(100%,1200px)] py-2">
             <div className="rounded-2xl p-6 bg-yellow-200 dark:bg-yellow-600">
-              <p className="font-[600] text-[2.8rem] opacity-90">{numberWithCommas(activeCases)}</p>
+              <p className="font-[600] text-[2.8rem] opacity-90">
+                {activeCases ? numberWithCommas(activeCases) : null}
+              </p>
               <p className="uppercase opacity-80 font-[200]">aktibong kaso</p>
             </div>
             <div className="rounded-2xl p-6 bg-green-400 dark:bg-green-800">
-              <p className="font-[600] text-[2.8rem] opacity-90">{numberWithCommas(recovered)}</p>
+              <p className="font-[600] text-[2.8rem] opacity-90">
+                {recovered ? numberWithCommas(recovered) : null}
+              </p>
               <p className="uppercase opacity-80 font-[200]">gumaling</p>
             </div>
             <div className="rounded-2xl p-6 bg-red-300 dark:bg-red-700">
-              <p className="font-[600] text-[2.8rem] opacity-90">{numberWithCommas(died)}</p>
+              <p className="font-[600] text-[2.8rem] opacity-90">
+                {died ? numberWithCommas(died) : null}
+              </p>
               <p className="uppercase opacity-80 font-[200]">namatay</p>
             </div>
           </div>
@@ -83,11 +97,14 @@ const Home: NextPage = ({
   );
 };
 
-export const getStaticProps: GetStaticProps = async (ctx) => {
+export async function getStaticProps(ctx: GetStaticPropsContext) {
   return {
-    props: await getCases(),
+    props: {
+      ...(await getCases()),
+      lastUpdated: new Date().getTime(),
+    },
     revalidate: 60,
   };
-};
+}
 
 export default Home;

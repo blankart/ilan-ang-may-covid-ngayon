@@ -36,6 +36,7 @@
   },
   "plugins": ["@typescript-eslint", "tailwindcss"],
   "rules": {
+    "react/prop-types": "off",
     "@next/next/no-title-in-document-head": "off",
     "react/jsx-curly-brace-presence": "off",
     "prefer-template": "off",
