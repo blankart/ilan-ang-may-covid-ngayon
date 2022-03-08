@@ -14,8 +14,6 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   died,
   date,
   newCases,
-  newRecovered,
-  newDied,
   lastUpdated,
 }) => {
   const _todaysDate = new Date();
@@ -52,20 +50,6 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
               {newCases ? numberWithCommas(newCases) : null}
             </p>
             <p className="uppercase text-[2rem]">bagong kaso {appendedText}</p>
-            <div className="flex flex-col md:flex-row justify-center items-center gap-4 mt-6]">
-              <div>
-                <p className="text-[3rem] font-[600]">
-                  {newRecovered ? numberWithCommas(newRecovered) : null}
-                </p>
-                <p className="uppercase font-[300]">bagong gumaling {appendedText}</p>
-              </div>
-              <div>
-                <p className="text-[3rem] font-[600]">
-                  {newDied ? numberWithCommas(newDied) : null}
-                </p>
-                <p className="uppercase font-[300]">bagong namatay {appendedText}</p>
-              </div>
-            </div>
           </div>
           <div className="grid grid-cols-1 gap-2 md:grid-cols-3 w-[min(100%,1200px)] py-2">
             <div className="rounded-2xl p-6 bg-yellow-200 dark:bg-yellow-600">
