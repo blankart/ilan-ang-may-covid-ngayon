@@ -1,11 +1,6 @@
 import { load } from "cheerio";
 import dayjs from "dayjs";
 
-const NEW_CASE_IDX = 213 as const;
-const ACTIVE_CASE_IDX = 257 as const;
-const RECOVERED_IDX = 566 as const;
-const DIED_IDX = 567 as const;
-
 export async function getCases(date?: string) {
   try {
     const url =
@@ -37,6 +32,16 @@ export async function getCases(date?: string) {
         _data.secondaryInfo.presModelMap.dataDictionary.presModelHolder.genDataDictionaryPresModel
           .dataSegments["0"].dataColumns[2].dataValues[2],
       ).toDate();
+
+      const [ACTIVE_CASE_IDX, RECOVERED_IDX, DIED_IDX] =
+        _data.secondaryInfo.presModelMap.vizData.presModelHolder.genPresModelMapPresModel
+          .presModelMap["Epi_BreakdownBar"].presModelHolder.genVizDataPresModel.paneColumnsData
+          .paneColumnsList[0].vizPaneColumns[2].aliasIndices;
+
+      const [NEW_CASE_IDX] =
+        _data.secondaryInfo.presModelMap.vizData.presModelHolder.genPresModelMapPresModel
+          .presModelMap["Epi_TotalCases#"].presModelHolder.genVizDataPresModel.paneColumnsData
+          .paneColumnsList[0].vizPaneColumns[2].aliasIndices;
 
       const newCases = inputs[NEW_CASE_IDX];
       const activeCases = inputs[ACTIVE_CASE_IDX];
