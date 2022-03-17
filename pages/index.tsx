@@ -18,9 +18,12 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 }) => {
   const _todaysDate = new Date();
   const todaysDate = dayjs(_todaysDate).format("MMMM DD, YYYY");
-  const foundDataDate = date ? dayjs(new Date(date)).format("MMMM DD, YYYY") : null;
-  const fromYesterday = todaysDate !== foundDataDate;
-  const appendedText = fromYesterday ? "kahapon" : null;
+  const _foundDataDate = date ? new Date(date) : null;
+  const foundDataDate = _foundDataDate ? dayjs(_foundDataDate).format("MMMM DD, YYYY") : null;
+  const dayDifference = _foundDataDate ? _todaysDate.getDate() - _foundDataDate.getDate() : null;
+  const appendedText =
+    dayDifference === 1 ? "kahapon" : dayDifference === 0 ? null : `noong ${foundDataDate}`;
+  const fromNotToday = todaysDate !== foundDataDate;
   const lastUpdatedDate = dayjs(new Date(lastUpdated)).format("MMMM D, YYYY h:mm A");
 
   return (
@@ -33,10 +36,11 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
           <h1 className="text-[4rem] font-bold mt-10 leading-[3.5rem] tracking-[-0.20rem]">
             Ilan ang may COVID ngayon?
           </h1>
-          {fromYesterday ? (
+          {fromNotToday ? (
             <h2 className="text-[1.6rem] leading-8 font-[400] tracking-[-0.12rem] my-4">
-              Wala pang datos 😔. Alamin ang bilang ng kaso ng COVID-19 sa Pilipinas 🇵🇭 kahapon{" "}
-              <br />({foundDataDate})
+              Wala pang datos 😔. Alamin ang bilang ng kaso ng COVID-19 sa Pilipinas 🇵🇭{" "}
+              {appendedText} <br />
+              {appendedText === "kahapon" && `(${foundDataDate})`}
             </h2>
           ) : (
             <h2 className="text-[1.6rem] leading-8 font-[400] tracking-[-0.12rem] my-4">

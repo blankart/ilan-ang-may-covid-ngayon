@@ -30,7 +30,10 @@ export async function getCases(date?: string) {
           .dataSegments["0"].dataColumns[0].dataValues;
       const FOUND_DATE = dayjs(
         _data.secondaryInfo.presModelMap.dataDictionary.presModelHolder.genDataDictionaryPresModel
-          .dataSegments["0"].dataColumns[2].dataValues[2],
+          .dataSegments["0"].dataColumns[4].dataValues[
+          _data.secondaryInfo.presModelMap.dataDictionary.presModelHolder.genDataDictionaryPresModel
+            .dataSegments["0"].dataColumns[4].dataValues.length - 1
+        ],
       ).toDate();
 
       const [ACTIVE_CASE_IDX, RECOVERED_IDX, DIED_IDX] =
