@@ -21,8 +21,14 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   const _foundDataDate = date ? new Date(date) : null;
   const foundDataDate = _foundDataDate ? dayjs(_foundDataDate).format("MMMM DD, YYYY") : null;
   const dayDifference = _foundDataDate ? _todaysDate.getDate() - _foundDataDate.getDate() : null;
-  const appendedText =
-    dayDifference === 1 ? "kahapon" : dayDifference === 0 ? null : `noong ${foundDataDate}`;
+  let appendedText: string | null = "";
+  if (dayDifference === 1) {
+    appendedText = "kahapon";
+  } else if (dayDifference === 0) {
+    appendedText = null;
+  } else {
+    appendedText = `noong ${foundDataDate}`;
+  }
   const fromNotToday = todaysDate !== foundDataDate;
   const lastUpdatedDate = dayjs(new Date(lastUpdated)).format("MMMM D, YYYY h:mm A");
 
