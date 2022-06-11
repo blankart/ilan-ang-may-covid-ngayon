@@ -24,7 +24,10 @@ export default function Document() {
           name="bingbot"
           content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
         />
-        <meta name="google-site-verification" content="9KOgr8Q-Q6ld9OTVR2_UJRySsUeUCRCcP1NHL6-h-u8" />
+        <meta
+          name="google-site-verification"
+          content="9KOgr8Q-Q6ld9OTVR2_UJRySsUeUCRCcP1NHL6-h-u8"
+        />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="apple-mobile-web-app-title" content={title} />
         <meta name="application-name" content={title} />
