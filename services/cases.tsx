@@ -36,7 +36,7 @@ export async function getCases(date?: string) {
         ],
       ).toDate();
 
-      const [ACTIVE_CASE_IDX, RECOVERED_IDX, DIED_IDX] =
+      const [_, ACTIVE_CASE_IDX, RECOVERED_IDX, DIED_IDX] =
         _data.secondaryInfo.presModelMap.vizData.presModelHolder.genPresModelMapPresModel
           .presModelMap["Epi_BreakdownBar"].presModelHolder.genVizDataPresModel.paneColumnsData
           .paneColumnsList[0].vizPaneColumns[2].aliasIndices;
