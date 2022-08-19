@@ -37,7 +37,7 @@ export async function getCases(date?: string) {
         ],
       ).toDate();
 
-      const [_, ACTIVE_CASE_IDX, RECOVERED_IDX, DIED_IDX] =
+      const [ACTIVE_CASE_IDX, RECOVERED_IDX, DIED_IDX] =
         _data.secondaryInfo.presModelMap.vizData.presModelHolder.genPresModelMapPresModel
           .presModelMap.Epi_BreakdownBar.presModelHolder.genVizDataPresModel.paneColumnsData
           .paneColumnsList[0].vizPaneColumns[2].aliasIndices;
@@ -53,11 +53,11 @@ export async function getCases(date?: string) {
       const died = inputs[DIED_IDX];
       const totalCases = activeCases + recovered + died;
       return {
-        activeCases,
-        recovered,
-        died,
-        totalCases,
-        newCases,
+        activeCases: activeCases ?? null,
+        recovered: recovered ?? null,
+        died: died ?? null,
+        totalCases: totalCases ?? null,
+        newCases: newCases ?? null,
         date: FOUND_DATE.getTime(),
       };
     }
